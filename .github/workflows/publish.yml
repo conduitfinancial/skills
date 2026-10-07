@@ -1,0 +1,27 @@
+name: publish
+
+on:
+  push:
+    branches: [main]
+
+concurrency: publish
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'conduit-financial/skills'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - env:
+          DEPLOY_KEY: ${{ secrets.PUBLISH_DEPLOY_KEY }}
+        run: |
+          install -m 600 /dev/null "$RUNNER_TEMP/deploy_key"
+          printf '%s\n' "$DEPLOY_KEY" > "$RUNNER_TEMP/deploy_key"
+          GIT_SSH_COMMAND="ssh -i $RUNNER_TEMP/deploy_key -o IdentitiesOnly=yes" \
+            git push git@github.com:conduitfinancial/skills.git HEAD:refs/heads/main

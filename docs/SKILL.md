@@ -21,7 +21,7 @@ Build and test on the sandbox. Change the base URL for real customers. The API i
 - **What an environment supports now:** ask the API, not the docs. The [API reference](https://docs.conduit.financial/api-reference/overview) lists a requirements endpoint per resource, the offerable asset and chain pairs, and quotes.
 - **Error codes and the error response shape:** `https://docs.conduit.financial/errors`.
 - **Conventions** (ids, casing, pagination, idempotency, async responses): `https://docs.conduit.financial/api-reference/overview`.
-- **Claude Code:** `claude mcp add --transport http conduit-docs https://v2.docs.conduit.financial/mcp` adds the documentation as an MCP server.
+- **Claude Code:** `claude mcp add --transport http conduit-docs https://docs.conduit.financial/mcp` adds the documentation as an MCP server.
 
 Read the guide before the first call of a phase. Read the spec before you build a request body.
 
